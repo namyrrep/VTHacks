@@ -94,12 +94,3 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 });
-            75% { transform: translateX(-5px); }
-        }
-        
-        .shake {
-            animation: shake 0.4s ease-in-out;
-        }
-    `;
-    document.head.appendChild(style);
-});
