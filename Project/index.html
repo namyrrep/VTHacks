@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hokie Houses Rental Data</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .data-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            color: white;
+        }
+        
+        .property-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Hokie Houses Rental Data</h1>
+                <p class="tagline">Blacksburg Rental Property Information</p>
+            </div>
+        </header>
+        
+        <main>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search properties...">
+                    <button id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="data-container">
+                <h2>Rental Properties</h2>
+                <div id="properties-list" class="loading">
+                    <p>Loading properties data...</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Hokie Houses & Apartments | <a href="../index.html">Home</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // This would be replaced with actual API integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const propertiesList = document.getElementById('properties-list');
+            
+            // Simulate data loading
+            setTimeout(() => {
+                propertiesList.innerHTML = '<p>API integration required. Run the Python script to fetch data.</p>';
+                propertiesList.classList.remove('loading');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

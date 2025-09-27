@@ -1,0 +1,72 @@
+import requests
+import os
+import sys
+import json
+
+def get_rental_properties(api_key=None):
+    """
+    Fetch rental properties from the Rentcast API.
+    
+    Args:
+        api_key (str): Rentcast API key. If None, will try to get from environment variable.
+    
+    Returns:
+        dict: JSON response from the API or error information
+    """
+    # Check for API key in parameters or environment variables
+    if not api_key:
+        api_key = os.environ.get('RENTCAST_API_KEY')
+    
+    # Validate API key exists
+    if not api_key:
+        print("Error: No API key provided. Set RENTCAST_API_KEY environment variable or pass as parameter.")
+        print("You can get an API key from https://rentcast.io/")
+        sys.exit(1)
+    
+    # Set up the API endpoint and headers
+    url = "https://api.rentcast.io/v1/properties"
+    headers = {
+        "X-Api-Key": api_key,
+        "Content-Type": "application/json"
+    }
+    
+    # Optional parameters - can be expanded later
+    params = {
+        # "city": "Blacksburg",
+        # "state": "VA",
+        # "limit": 10
+    }
+    
+    try:
+        # Make the request
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()  # Raise exception for 4XX/5XX responses
+        
+        return response.json()
+    
+    except requests.exceptions.HTTPError as e:
+        print(f"HTTP Error: {e}")
+        print(f"Response body: {response.text}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+    except json.JSONDecodeError:
+        print("Error decoding JSON response")
+    
+    return None
+
+if __name__ == "__main__":
+    # Instructions for users
+    print("Fetching rental properties from Rentcast API...")
+    print("To use this script, set your API key as an environment variable:")
+    print("export RENTCAST_API_KEY='your-api-key-here'")
+    
+    # Get and display the properties
+    data = get_rental_properties()
+    
+    if data:
+        # Pretty print the first result to avoid overwhelming output
+        print(f"\nFound {len(data.get('properties', [])) if 'properties' in data else 0} properties")
+        if 'properties' in data and data['properties']:
+            print("\nSample property:")
+            sample = data['properties'][0]
+            print(json.dumps(sample, indent=2))
