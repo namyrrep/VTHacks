@@ -18,6 +18,7 @@ steps:
       - '--region=us-central1'
       - '--platform=managed'
       - '--allow-unauthenticated'
+      - '--port=8080'
 
 images:
   - 'gcr.io/$PROJECT_ID/hokie-houses:$COMMIT_SHA'
